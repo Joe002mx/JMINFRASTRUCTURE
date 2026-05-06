@@ -10,29 +10,42 @@ export function Reveal({ children, className = "", ...props }: RevealProps) {
   useEffect(() => {
     const node = ref.current;
 
-    if (!node || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    if (!node) {
       return;
     }
 
-    const rect = node.getBoundingClientRect();
+    try {
+      const prefersReducedMotion =
+        typeof window.matchMedia === "function" &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    if (rect.top > window.innerHeight * 0.92) {
-      node.dataset.reveal = "pending";
+      if (prefersReducedMotion || typeof window.IntersectionObserver !== "function") {
+        node.dataset.reveal = "visible";
+        return;
+      }
+
+      const rect = node.getBoundingClientRect();
+
+      if (rect.top > window.innerHeight * 0.92) {
+        node.dataset.reveal = "pending";
+      }
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            node.dataset.reveal = "visible";
+            observer.unobserve(node);
+          }
+        },
+        { rootMargin: "0px 0px -12% 0px", threshold: 0.12 },
+      );
+
+      observer.observe(node);
+
+      return () => observer.disconnect();
+    } catch {
+      node.dataset.reveal = "visible";
     }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          node.dataset.reveal = "visible";
-          observer.unobserve(node);
-        }
-      },
-      { rootMargin: "0px 0px -12% 0px", threshold: 0.12 },
-    );
-
-    observer.observe(node);
-
-    return () => observer.disconnect();
   }, []);
 
   return (

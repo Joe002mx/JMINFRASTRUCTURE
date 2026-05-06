@@ -1,16 +1,68 @@
 "use client";
 
-import { useState } from "react";
+import { type MouseEvent, useState } from "react";
 
 const navItems = [
   { label: "System", href: "#system" },
   { label: "Examples", href: "#examples" },
-  { label: "Process", href: "#process" },
+  { label: "Build", href: "#process" },
   { label: "Contact", href: "#contact" },
 ];
 
+function getHeaderOffset() {
+  const header = document.querySelector<HTMLElement>(".site-header");
+  return (header?.getBoundingClientRect().height ?? 0) + 18;
+}
+
+function getSectionScrollTarget(section: HTMLElement) {
+  return (
+    section.querySelector<HTMLElement>(".eyebrow, h1, h2") ?? section
+  );
+}
+
+function prefersReducedMotion() {
+  try {
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  } catch {
+    return false;
+  }
+}
+
+function scrollToSection(href: string) {
+  const sectionId = href.startsWith("#") ? href.slice(1) : "";
+  const section = sectionId ? document.getElementById(sectionId) : null;
+
+  if (!section) {
+    return;
+  }
+
+  const target = getSectionScrollTarget(section);
+  const top =
+    target.getBoundingClientRect().top + window.scrollY - getHeaderOffset();
+
+  window.scrollTo({
+    top: Math.max(0, top),
+    behavior: prefersReducedMotion() ? "auto" : "smooth",
+  });
+  window.history.replaceState(null, "", href);
+}
+
 export function SiteHeader() {
   const [isOpen, setIsOpen] = useState(false);
+
+  function handleNavClick(
+    event: MouseEvent<HTMLAnchorElement>,
+    href: string,
+    closeMenu = false,
+  ) {
+    event.preventDefault();
+
+    if (closeMenu) {
+      setIsOpen(false);
+    }
+
+    window.setTimeout(() => scrollToSection(href), 0);
+  }
 
   return (
     <header className="site-header sticky top-0 z-50 border-b border-[color:var(--line)] bg-[color:var(--background)]/92 backdrop-blur">
@@ -38,6 +90,7 @@ export function SiteHeader() {
               key={item.href}
               href={item.href}
               className="transition-colors hover:text-[color:var(--ink)]"
+              onClick={(event) => handleNavClick(event, item.href)}
             >
               {item.label}
             </a>
@@ -69,7 +122,7 @@ export function SiteHeader() {
               key={item.href}
               href={item.href}
               className="mobile-nav-link"
-              onClick={() => setIsOpen(false)}
+              onClick={(event) => handleNavClick(event, item.href, true)}
             >
               {item.label}
             </a>

@@ -3,9 +3,15 @@ import { Manrope } from "next/font/google";
 import "./globals.css";
 
 const siteUrl = "https://jminfrastructure.co.uk";
-const title = "JM Infrastructure | Digital Systems for Stronger Business Presence";
+const title = "JM Infrastructure | Local Business Digital Infrastructure in Glasgow";
 const description =
-  "JM Infrastructure builds digital systems for businesses across Glasgow and Central Scotland: search presence, credibility, enquiry flow, follow-up, and reviews.";
+  "Online infrastructure for trades and local service businesses across Glasgow and Central Scotland: website, Google profile, enquiry flow, follow-up, and reviews.";
+const socialImage = {
+  url: "/og-image.png",
+  width: 1731,
+  height: 909,
+  alt: "JM Infrastructure brand preview",
+};
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -20,6 +26,16 @@ export const metadata: Metadata = {
   alternates: {
     canonical: siteUrl,
   },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
   openGraph: {
     title,
     description,
@@ -27,6 +43,13 @@ export const metadata: Metadata = {
     siteName: "JM Infrastructure",
     type: "website",
     locale: "en_GB",
+    images: [socialImage],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+    images: [socialImage],
   },
   robots: {
     index: true,
