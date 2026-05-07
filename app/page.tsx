@@ -115,9 +115,8 @@ function HeroSection() {
             Your business should look as strong online as it is in reality.
           </h1>
           <p className="mt-7 max-w-2xl text-lg leading-8 text-[color:var(--muted)] sm:text-xl">
-            JM Infrastructure builds the digital structure behind stronger
-            online representation: your website, Google profile, reviews, and
-            customer follow-up working as one clearer system.
+            Your website, Google profile, reviews, and customer follow-up
+            working as one complete system.
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <a className="button-primary" href="#contact">
