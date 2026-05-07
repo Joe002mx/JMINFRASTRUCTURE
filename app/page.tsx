@@ -124,7 +124,7 @@ function HeroSection() {
               Start a conversation
             </a>
             <a className="button-secondary" href="#reality-gap">
-              See what this fixes
+              See what could work better
             </a>
           </div>
         </Reveal>
@@ -354,7 +354,9 @@ function FounderSection() {
             <div className="mt-6 grid gap-4 text-base leading-7 text-[color:var(--muted)] sm:text-lg">
               <p>
                 I&apos;m Joe, founder of JM Infrastructure Consultancy, based in
-                Glasgow. I build practical online infrastructure for
+                Glasgow. I studied mathematics at the University of Glasgow,
+                and that shapes how I approach systems, clarity, and structure.
+                I build practical online infrastructure for
                 businesses that are already doing good work, but are not being
                 represented properly when people look them up.
               </p>
