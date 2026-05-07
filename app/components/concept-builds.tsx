@@ -100,7 +100,19 @@ function ConceptPreview({
   motionKey: number;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const previousShouldPlay = useRef(shouldPlay);
   const [showPosterFallback, setShowPosterFallback] = useState(false);
+
+  useEffect(() => {
+    const becamePlayable = shouldPlay && !previousShouldPlay.current;
+    previousShouldPlay.current = shouldPlay;
+
+    if (!becamePlayable || prefersReducedMotion || !showPosterFallback) {
+      return;
+    }
+
+    setShowPosterFallback(false);
+  }, [prefersReducedMotion, shouldPlay, showPosterFallback]);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -124,12 +136,16 @@ function ConceptPreview({
       if (playAttempt && typeof playAttempt.catch === "function") {
         void playAttempt.catch(() => {
           video.pause();
-          setShowPosterFallback(true);
+          if (shouldPlay && video.error) {
+            setShowPosterFallback(true);
+          }
         });
       }
     } catch {
       video.pause();
-      setTimeout(() => setShowPosterFallback(true), 0);
+      if (shouldPlay && video.error) {
+        setTimeout(() => setShowPosterFallback(true), 0);
+      }
     }
   }, [concept.id, prefersReducedMotion, shouldPlay, showPosterFallback]);
 
@@ -171,7 +187,7 @@ function ConceptPreview({
 
 export function ConceptBuildsShowcase() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
   const [direction, setDirection] = useState<MotionDirection>("next");
   const [motionKey, setMotionKey] = useState(0);
   const prefersReducedMotion = usePrefersReducedMotion();
@@ -189,6 +205,7 @@ export function ConceptBuildsShowcase() {
 
     try {
       if (typeof window.IntersectionObserver !== "function") {
+        window.setTimeout(() => setIsVisible(true), 0);
         return;
       }
 
@@ -203,6 +220,7 @@ export function ConceptBuildsShowcase() {
 
       return () => observer.disconnect();
     } catch {
+      window.setTimeout(() => setIsVisible(true), 0);
       return;
     }
   }, []);
