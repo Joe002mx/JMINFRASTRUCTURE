@@ -108,13 +108,13 @@ function JsonLd() {
 function HeroSection() {
   return (
     <section className="hero-shell">
-      <div className="mx-auto grid w-full max-w-7xl gap-12 px-5 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:px-10">
+      <div className="mx-auto grid w-full max-w-7xl gap-14 px-5 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:px-10">
         <Reveal className="flex flex-col justify-center">
           <p className="eyebrow">Glasgow and Central Scotland</p>
           <h1 className="mt-5 max-w-4xl text-4xl font-semibold leading-[0.98] text-[color:var(--ink)] sm:text-6xl sm:leading-[0.96] lg:text-7xl">
             Your business should look as strong online as it is in reality.
           </h1>
-          <p className="mt-7 max-w-2xl text-lg leading-8 text-[color:var(--muted)] sm:text-xl">
+          <p className="mt-8 max-w-2xl text-lg leading-8 text-[color:var(--muted)] sm:mt-7 sm:text-xl">
             Your website, Google profile, reviews, and customer follow-up
             working as one complete system.
           </p>
