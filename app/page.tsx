@@ -53,12 +53,12 @@ const processSteps = [
   {
     step: "02",
     title: "Website structure",
-    copy: "Build the page people land on when they need to decide whether the business feels credible.",
+    copy: "Build the page people land on when they need to decide whether the business is worth contacting.",
   },
   {
     step: "03",
     title: "Enquiry flow",
-    copy: "Make the next step obvious, direct, and easy to take.",
+    copy: "The site is structured so customer interest becomes a direct message, not a task buried in a platform.",
   },
   {
     step: "04",
