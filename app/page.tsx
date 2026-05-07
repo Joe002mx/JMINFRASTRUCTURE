@@ -116,8 +116,8 @@ function HeroSection() {
           </h1>
           <p className="mt-7 max-w-2xl text-lg leading-8 text-[color:var(--muted)] sm:text-xl">
             JM Infrastructure builds the digital structure behind stronger
-            online representation: website, Google profile, and customer
-            follow-up.
+            online representation: your website, Google profile, reviews, and
+            customer follow-up working as one clearer system.
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <a className="button-primary" href="#contact">
