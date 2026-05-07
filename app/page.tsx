@@ -22,7 +22,7 @@ const infrastructureBlocks = [
   },
   {
     label: "Search presence",
-    detail: "Google profile, services, location signals, reviews, and contact routes made clearer.",
+    detail: "Your Google profile, service information, reviews, and contact routes structured so the business is easier to understand across search and AI-assisted results.",
   },
   {
     label: "Credibility",
@@ -48,7 +48,7 @@ const processSteps = [
   {
     step: "01",
     title: "Google presence",
-    copy: "Make the search result clearer: profile, services, reviews, photos, and contact routes.",
+    copy: "Structure the information search engines and AI-assisted results rely on: profile, services, reviews, photos, and contact routes.",
   },
   {
     step: "02",
