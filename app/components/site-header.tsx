@@ -40,10 +40,18 @@ function scrollToSection(href: string) {
   const top =
     target.getBoundingClientRect().top + window.scrollY - getHeaderOffset();
 
-  window.scrollTo({
-    top: Math.max(0, top),
-    behavior: prefersReducedMotion() ? "auto" : "smooth",
-  });
+  const scrollTop = Math.max(0, top);
+  const lenis = window.__jmLenis;
+
+  if (lenis && !prefersReducedMotion()) {
+    lenis.scrollTo(scrollTop);
+  } else {
+    window.scrollTo({
+      top: scrollTop,
+      behavior: prefersReducedMotion() ? "auto" : "smooth",
+    });
+  }
+
   window.history.replaceState(null, "", href);
 }
 

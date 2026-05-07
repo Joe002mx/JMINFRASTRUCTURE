@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
+import { ScrollSmoothingProvider } from "./components/scroll-smoothing-provider";
 import "./globals.css";
 
 const siteUrl = "https://jminfrastructure.co.uk";
@@ -67,7 +68,9 @@ export default function RootLayout({
       lang="en"
       className={`${manrope.variable} h-full scroll-smooth antialiased`}
     >
-      <body className="flex min-h-full flex-col">{children}</body>
+      <body className="flex min-h-full flex-col">
+        <ScrollSmoothingProvider>{children}</ScrollSmoothingProvider>
+      </body>
     </html>
   );
 }
