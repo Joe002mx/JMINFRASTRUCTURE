@@ -123,7 +123,11 @@ function HeroSection() {
             <a className="button-primary" href="#contact">
               Start a conversation
             </a>
-            <a className="button-secondary" href="#reality-gap">
+            <a
+              className="button-secondary"
+              href="#reality-gap"
+              data-desktop-scroll-offset="72"
+            >
               See what could work better
             </a>
           </div>

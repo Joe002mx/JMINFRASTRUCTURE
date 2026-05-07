@@ -31,7 +31,7 @@ function getHashId(hash: string) {
   }
 }
 
-function getHashScrollTop(hash: string) {
+function getHashScrollTop(hash: string, offset = 0) {
   if (hash === "#") {
     return 0;
   }
@@ -47,7 +47,7 @@ function getHashScrollTop(hash: string) {
   const top =
     target.getBoundingClientRect().top + window.scrollY - getHeaderOffset();
 
-  return Math.max(0, top);
+  return Math.max(0, top - offset);
 }
 
 function isDesktopSmoothScrollEligible() {
@@ -108,8 +108,13 @@ export function ScrollSmoothingProvider({
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
-    function scrollToHash(lenis: Lenis, hash: string, immediate = false) {
-      const top = getHashScrollTop(hash);
+    function scrollToHash(
+      lenis: Lenis,
+      hash: string,
+      immediate = false,
+      offset = 0,
+    ) {
+      const top = getHashScrollTop(hash, offset);
 
       if (top === null) {
         return false;
@@ -147,7 +152,9 @@ export function ScrollSmoothingProvider({
 
       const link = getSamePageHashLink(anchor);
 
-      if (!link || !scrollToHash(lenis, link.hash)) {
+      const offset = Number(anchor.dataset.desktopScrollOffset ?? 0);
+
+      if (!link || !scrollToHash(lenis, link.hash, false, offset)) {
         return;
       }
 
