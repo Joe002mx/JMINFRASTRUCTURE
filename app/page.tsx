@@ -359,9 +359,6 @@ function FounderSection() {
                 I&apos;m Joe, founder of JM Infrastructure Consultancy, based in
                 Glasgow. I studied mathematics at the University of Glasgow,
                 and that shapes how I approach systems, clarity, and structure.
-                I build practical online infrastructure for
-                businesses that are already doing good work, but are not being
-                represented properly when people look them up.
               </p>
               <p>
                 This is not a setup where your business gets passed between
